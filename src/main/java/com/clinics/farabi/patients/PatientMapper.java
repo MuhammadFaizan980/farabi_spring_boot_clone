@@ -11,12 +11,12 @@ public class PatientMapper {
 
     PatientEntity toPatientEntity(PatientRequest request) {
         PatientEntity patient = new PatientEntity();
-        patient.firstName = request.firstName();
-        patient.lastName = request.lastName();
-        patient.email = request.email();
-        patient.phoneNumber = request.phone();
-        patient.password = request.password();
-        patient.age = request.age();
+        patient.setFirstName(request.firstName());
+        patient.setLastName(request.lastName());
+        patient.setEmail(request.email());
+        patient.setPhoneNumber(request.phone());
+        patient.setPassword(request.password());
+        patient.setAge(request.age());
 
         return patient;
     }

@@ -1,27 +1,36 @@
 package com.clinics.farabi.patients;
 
+import com.clinics.farabi.bookings.BookingEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "patients")
 public class PatientEntity {
     @Id
     @GeneratedValue
-    public int id;
+    private int id;
     @Column(name = "first_name")
     @JsonProperty("first_name")
-    public String firstName;
+    private String firstName;
     @Column(name = "last_name")
     @JsonProperty("last_name")
-    public String lastName;
+    private String lastName;
     @Column(unique = true)
-    public String email;
-    public String password;
+    private String email;
+    private String password;
     @Column(unique = true, name = "phone")
     @JsonProperty("phone")
-    public String phoneNumber;
-    public Integer age;
+    private String phoneNumber;
+    private int age;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<BookingEntity> patientBookings;
+
 
     public PatientEntity() {
     }
@@ -80,5 +89,13 @@ public class PatientEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<BookingEntity> getPatientBookings() {
+        return patientBookings;
+    }
+
+    public void setPatientBookings(List<BookingEntity> patientBookings) {
+        this.patientBookings = patientBookings;
     }
 }
